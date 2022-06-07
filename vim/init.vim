@@ -95,6 +95,10 @@ nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 nnoremap <leader>gc :GCheckout<CR>
 
+" Scripting & Bashing
+nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer
+nnoremap <leader>x :!chmod +x %<CR>
+
 colorscheme gruvbox
 let g:prettier#config#single_quote = 'true'
 let g:prettier#config#trailing_comma = 'all'
