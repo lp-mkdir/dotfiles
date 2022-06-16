@@ -53,7 +53,7 @@ font:
   use_thin_strokes: true
 
 selection:
-  semantic_escape_chars: ",‚îÇ`|:\"' ()[]{}<>\t"
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
   save_to_clipboard: true
