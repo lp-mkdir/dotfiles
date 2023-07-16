@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Install env tokens
+cp -f ~/work/.env $PWD 
+source .env
+
+yarn
+# install pnp
+yarn dlx @yarnpkg/sdks vim
+
+echo "JobCloud installer installed successfully."
