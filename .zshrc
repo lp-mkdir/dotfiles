@@ -1,5 +1,6 @@
-# Change the username
-export ZSH="/Users/luispacheco/.oh-my-zsh"
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+export ZSH="/Users/$USER/.oh-my-zsh"
 
 ZSH_THEME="avit"
 
@@ -7,7 +8,7 @@ plugins=(
   git
   bundler
   dotenv
-  osx
+  macos	
   rake
   web-search
   zsh-autosuggestions
@@ -15,11 +16,6 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # user configuration
 # -------------------------------------------------------------------
@@ -45,60 +41,74 @@ alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall F
 
 alias deleteDSFiles="find . -name '.DS_Store' -type f -delete"
 
+# JobCloud
+alias j='cd $(find ~/work/b2c-frontend.git/hackaton ~/work/b2c-frontend.git/chore ~/work/b2c-frontend.git/fix ~/work/b2c-frontend.git/feat ~/work/b2c-frontend.git/lab ~/work/b2c-frontend.git/perf ~/work/b2c-frontend.git/exp -type d -maxdepth 2 | fzf)'
+alias ji='~/.local/bin/jc-installer'
+
 ## git aliases
 function gcc { git commit -m "$@"; }
-alias gcm="git checkout master";
-alias gs="git status";
-alias gpull="git pull";
-alias gf="git fetch";
-alias gfa="git fetch --all";
-alias gf="git fetch origin";
-alias gpush="git push";
-alias ga="git add .";
-alias gaa="git add -A";
-alias gb="git branch";
+alias gcm="git checkout master"
+alias gs="git status"
+alias gpull="git pull"
+alias gf="git fetch"
+alias gfa="git fetch --all"
+alias gf="git fetch origin"
+alias gpush="git push"
+alias ga="git add ."
+alias gaa="git add -A"
+alias gb="git branch"
 alias gbr="git branch remote"
 alias gfr="git remote update"
 alias gbn="git checkout -B "
-alias grf="git reflog";
+alias grf="git reflog"
 alias grh="git reset HEAD~" # last commit
 alias gac="git add . && git commit -a -m "
 alias gsu="git gpush --set-upstream origin "
-alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-comm$
+alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-comm$"
+alias v="nvim"
 export PATH="/usr/local/opt/node@10/bin:$PATH"
-source /Users/luispacheco/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /Users/luispacheco/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 
 ## Gatsby
 alias gc="gatsby clean"
 alias gd="gatsby develop"
-alias gcd="gatsby clean && develop"
-
+alias gacd="gatsby clean && develop"
 ## youtube-dl
 alias ybv="youtube-dl -f 'bestvideo,bestaudio' -o '%(title)s.f%(format_id)s.%(ext)s'"
 
 ## from Jason ------------------
-
 # -------------------------------------------------------------------
 # Git stuff
 # -------------------------------------------------------------------
-
 # Use hub to make git more powerful (https://hub.github.com/)
 alias git=hub
-
-# Shortcut to checkout master and pull from upstream
-alias gu="git checkout master && git pull upstream master"
-
 # Clean, compact git status
 alias s="git status -sb"
 
-# leklouis
-alias gcd="git checkout dev"
+# Luis Pacheco Config
+alias gpp="/Users/$USER/bash/git/gpp.sh"
+alias gpph="/Users/$USER/bash/git/gpph.sh"
+alias gu="/Users/$USER/bash/git/gu.sh"
+alias gcd="git checkout develop"
+# JobCloud
+alias jchusky="/Users/$USER/bash/git/husky.sh"
+alias gjc="cd ~/code/b2c-frontend"
 
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
   export FZF_DEFAULT_OPTS='-m --height 50% --border'
 fi
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore -l ""'
+export PERCY_BRANCH=local
+export PERCY_TOKEN=11e6184b8442594e8a43d55a2469f4d7fbb53c8752d8a37680f821c86d2f9bf8
+eval "$(pyenv init -)"
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
