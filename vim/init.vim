@@ -1,8 +1,7 @@
 set path+=**
 
-set wildignore+=*_build/*
-set wildignore+=*_build/*
 " Ignore files
+set wildignore+=*_build/*
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=**/coverage/*
@@ -12,6 +11,7 @@ set wildignore+=**/ios/*
 set wildignore+=**/.git/*
 
 call plug#begin('~/.vim/plugged')
+set ma
 set encoding=utf-8
 set fileencoding=utf-8
 set shortmess+=c
@@ -64,6 +64,9 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
+" GWorktree
+Plug 'ThePrimeagen/git-worktree.nvim'
+
 " HARPOON!!
 Plug 'mhinz/vim-rfc'
 Plug 'nvim-lua/plenary.nvim' " don't forget to add this one if you don't have it yet!
@@ -83,15 +86,13 @@ call plug#end()
 
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
 
-"Plug 'scrooloose/nerdtree'
 let g:coc_global_extensions = ['coc-tsserver',
 \ 'coc-json',
 \ 'coc-html-css-support',
 \ 'coc-css',
 \ 'coc-sql',
 \ 'coc-yaml']
-"Plug 'preservim/nerdcommenter'
-" Call plugin end -------------------------------------------------
+
 " Mapping keys
 let mapleader=" "
 nmap <Leader>s <Plug>(easymotion-s2)
@@ -103,10 +104,13 @@ nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <silent><Leader>a :lua require("harpoon.mark").add_file()<CR>
 nnoremap <silent><C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
 nnoremap <silent><leader>ki :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
-nnoremap <silent><C-j> :lua require("harpoon.ui").nav_file(1)<CR>
-nnoremap <silent><C-k> :lua require("harpoon.ui").nav_file(2)<CR>
-nnoremap <silent><C-l> :lua require("harpoon.ui").nav_file(3)<CR>
-" nnoremap <silent><C-;> :lua require("harpoon.ui").nav_file(4)<CR>
+nnoremap <silent><leader>j :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <silent><leader>k :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <silent><leader>l :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <silent><leader>; :lua require("harpoon.ui").nav_file(4)<CR>
+
+" Window splitting
+nnoremap <C-L> <C-W><C-L>
 
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
@@ -145,19 +149,23 @@ nnoremap <leader>f :Files<CR>
 " CoC
 " Navigating
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> <F8> <Plug>(coc-diagnostic-prev)
 nmap <silent> <F9> <Plug>(coc-diagnostic-next
 nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
+nmap <silent>gf   <Plug>(coc-codeaction-selected)w
+nmap <silent>ga  <Plug>(coc-codeaction)
 
 " GIT
 nmap <leader>gs :G<CR>
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
-nnoremap <leader>gc :GCheckout<CR>
+nnoremap <leader>gc :GBranches<CR>
+nnoremap <leader>gtn :lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
+nnoremap <leader>gt :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
+nnoremap <leader>gu :!~/bash/git/gu.sh<CR>
 
 " Scripting & Bashing
 nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer
@@ -193,6 +201,8 @@ set updatetime=300
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
+
+set background=dark
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
