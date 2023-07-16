@@ -1,6 +1,7 @@
 # Setup term for programs to be able to use it
 env:
-  TERM: alacritty
+  # TERM: alacritty  
+  TERM: xterm-256color
 
 window:
   # Spread additional padding evenly around the terminal content.
@@ -30,15 +31,15 @@ font:
     style: Bold Italic
 
   # Font size
-  size: 14.0
+  size: 16.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing
   # I've given in 14 spacing which fits really well with my fonts, you may change it
   # to your convenience but make sure to adjust 'glyph_offset' appropriately post that
   offset:
-   x: 0
-   y: 14
+   x: 0      
+   y: 6
 
   # Note: This requires RESTART
   # By default when you change the offset above you'll see an issue, where the texts are bottom
@@ -47,7 +48,7 @@ font:
   glyph_offset:
    x: 0
    # Keeping this as half of offset to vertically align the text in cursor
-   y: 7
+   y: 3
 
   # Better font rendering for mac
   use_thin_strokes: true
@@ -74,7 +75,6 @@ key_bindings:
   # Close window
   - { key: W, mods: Command, chars: "\x02\x26" }
   # Change windows 1...0
-  # 02310a
   - { key: Key0, mods: Command, chars: "\x02\x30" }
   - { key: Key1, mods: Command, chars: "\x02\x31" }
   - { key: Key2, mods: Command, chars: "\x02\x32" }
@@ -90,7 +90,11 @@ key_bindings:
   - { key: Minus, mods: Command, action: DecreaseFontSize }
   # Show all sessions
   - { key: A, mods: Command, chars: "\x02\x73" }
-
+  # Sessionizer
+  - { key: J, mods: Command, chars: "\x02\x6a" }
+  - { key: K, mods: Command, chars: "\x02\x6b" }    
+  # Find git worktrees  
+  - { key: J, mods: Control, chars: "\x02\x69" }
 
 # Colors (Gruvbox dark)
 colors:
