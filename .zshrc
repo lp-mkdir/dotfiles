@@ -106,8 +106,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore -l ""'
-export PERCY_BRANCH=local
-export PERCY_TOKEN=11e6184b8442594e8a43d55a2469f4d7fbb53c8752d8a37680f821c86d2f9bf8
 eval "$(pyenv init -)"
 
 # Fig post block. Keep at the bottom of this file.
