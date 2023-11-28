@@ -52,6 +52,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'leafgarland/typescript-vim'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'mbbill/undotree'
 
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -93,6 +94,9 @@ let g:coc_global_extensions = ['coc-tsserver',
 \ 'coc-sql',
 \ 'coc-yaml']
 
+" "0P
+nnoremap <leader>e "_C"0P
+
 " Mapping keys
 let mapleader=" "
 nmap <Leader>s <Plug>(easymotion-s2)
@@ -124,7 +128,6 @@ nnoremap Y yg$
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
-
 " greatest remap ever
 xnoremap <leader>p "_dP
 
@@ -139,12 +142,11 @@ vnoremap <leader>d "_d
 nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer<CR>
 nnoremap <leader>; :lua require("theprimeagen.git-worktree").execute(vim.loop.cwd(), "just-build")<CR>
 
-" This is the default extra key bindings
-map <leader>b :Buffers<CR>
-nnoremap <leader>g :Rg<CR>
-nnoremap <leader>m :Marks<CR>
-nnoremap <leader>t :Tags<CR>
-nnoremap <leader>f :Files<CR>
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 " CoC
 " Navigating
@@ -152,11 +154,19 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> <F8> <Plug>(coc-diagnostic-prev)
-nmap <silent> <F9> <Plug>(coc-diagnostic-next
+nmap <silent> <F8> <Plug>(coc-diagnostic-next
+nmap <silent> <F9> <Plug>(coc-diagnostic-prev)
 nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
-nmap <silent>gf   <Plug>(coc-codeaction-selected)w
+nmap <silent>gf   <Plug>(coc-fix-current)
 nmap <silent>ga  <Plug>(coc-codeaction)
+nnoremap <silent> gh :call CocAction('doHover')<CR>
+
+" Remap keys for applying code actions at the cursor position
+nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+" Remap keys for apply code actions affect whole buffer
+nmap <leader>as  <Plug>(coc-codeaction-source)
+" Apply the most preferred quickfix action to fix diagnostic on the current line
+" nmap <leader>gf  <Plug>(coc-fix-current)
 
 " GIT
 nmap <leader>gs :G<CR>
@@ -165,7 +175,8 @@ nmap <leader>gf :diffget //2<CR>
 nnoremap <leader>gc :GBranches<CR>
 nnoremap <leader>gtn :lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
 nnoremap <leader>gt :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
-nnoremap <leader>gu :!~/bash/git/gu.sh<CR>
+nnoremap <leader>gup :!~/bash/git/gu.sh<CR>
+nnoremap <leader>gu :UndotreeToggle<CR>
 
 " Scripting & Bashing
 nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer
@@ -218,3 +229,7 @@ endif
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
+
+lua << EOF
+require("lp-mkdir.git_worktree")
+EOF
