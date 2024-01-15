@@ -92,8 +92,8 @@ key_bindings:
   # Show all sessions
   - { key: A, mods: Command, chars: "\x02\x73" }
   # Sessionizer
-  - { key: J, mods: Command, chars: "\x02\x6a" }
-  - { key: K, mods: Command, chars: "\x02\x6b" }    
+  - { key: J, mods: Command, chars: "\x02\x6b" }
+  - { key: K, mods: Command, chars: "\x02\x6a" }
   # Find git worktrees  
   #- { key: J, mods: Control, chars: "\x02\x69" }
 
