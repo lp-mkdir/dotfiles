@@ -4,11 +4,11 @@
 CURRENT_USER=$USER
 
 # Neovim configuration
-NVIM_SRC_DIR="/Users/$CURRENT_USER/code/dotfiles/nvim"
+NVIM_SRC_DIR="/Users/$CURRENT_USER/personal/dotfiles/config/nvim"
 NVIM_DEST_DIR="/Users/$CURRENT_USER/.config/nvim"
 
 # Alacritty configuration
-ALACRITTY_SRC_DIR="/Users/$CURRENT_USER/code/dotfiles/alacritty"
+ALACRITTY_SRC_DIR="/Users/$CURRENT_USER/personal/dotfiles/config/alacritty"
 ALACRITTY_DEST_DIR="/Users/$CURRENT_USER/.config/alacritty"
 
 # Create destination directories if they don't exist
